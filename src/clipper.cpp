@@ -4626,4 +4626,4 @@ std::ostream& operator <<(std::ostream &s, const Paths &p)
 }
 //------------------------------------------------------------------------------
 
-} //clipper namespace
+}  // namespace clipper

@@ -399,6 +399,6 @@ class clipperException : public std::exception
 };
 //------------------------------------------------------------------------------
 
-} //clipper namespace
+}  // namespace clipper
 
-#endif //clipper_hpp
+#endif  // clipper_hpp
