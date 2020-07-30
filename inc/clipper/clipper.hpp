@@ -59,7 +59,7 @@
 #include <functional>
 #include <queue>
 
-namespace ClipperLib {
+namespace clipper {
 
 enum ClipType { ctIntersection, ctUnion, ctDifference, ctXor };
 enum PolyType { ptSubject, ptClip };
@@ -399,6 +399,6 @@ class clipperException : public std::exception
 };
 //------------------------------------------------------------------------------
 
-} //ClipperLib namespace
+} //clipper namespace
 
 #endif //clipper_hpp
