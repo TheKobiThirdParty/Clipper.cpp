@@ -236,8 +236,8 @@ bool SaveToFile(const string& filename, Paths &ppg, double scale = 1.0, unsigned
 
 bool LoadFromFile(Paths &ppg, const string& filename, double scale)
 {
-  //file format assumes: 
-  //  1. path coordinates (x,y) are comma separated (+/- spaces) and 
+  //file format assumes:
+  //  1. path coordinates (x,y) are comma separated (+/- spaces) and
   //  each coordinate is on a separate line
   //  2. each path is separated by one or more blank lines
 
@@ -252,12 +252,12 @@ bool LoadFromFile(Paths &ppg, const string& filename, double scale)
     double X = 0.0, Y = 0.0;
     if (!(ss >> X))
     {
-      //ie blank lines => flag start of next polygon 
+      //ie blank lines => flag start of next polygon
       if (pg.size() > 0) ppg.push_back(pg);
       pg.clear();
       continue;
     }
-    char c = ss.peek();  
+    char c = ss.peek();
     while (c == ' ') {ss.read(&c, 1); c = ss.peek();} //gobble spaces before comma
     if (c == ',') {ss.read(&c, 1); c = ss.peek();} //gobble comma
     while (c == ' ') {ss.read(&c, 1); c = ss.peek();} //gobble spaces after comma
@@ -284,7 +284,7 @@ void MakeRandomPoly(int edgeCount, int width, int height, Paths & poly)
 bool ASCII_icompare(const char* str1, const char* str2)
 {
   //case insensitive compare for ASCII chars only
-  while (*str1) 
+  while (*str1)
   {
     if (toupper(*str1) != toupper(*str2)) return false;
     str1++;
@@ -428,7 +428,7 @@ int main(int argc, char* argv[])
   c.AddPaths(clip, ptClip, true);
   Paths solution;
 
-  if (!c.Execute(clipType, solution, subj_pft, clip_pft)) 
+  if (!c.Execute(clipType, solution, subj_pft, clip_pft))
   {
     cout << (sClipType[clipType] + " failed!\n\n");
     return 1;
@@ -455,7 +455,7 @@ int main(int argc, char* argv[])
   svg.SaveToFile("solution.svg", svg_scale);
 
   //finally, show the svg image in the default viewing application
-  system("solution.svg"); 
+  system("solution.svg");
   return 0;
 }
 //---------------------------------------------------------------------------

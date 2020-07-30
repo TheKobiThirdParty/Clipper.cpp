@@ -27,11 +27,11 @@ class spiral
 {
 public:
     spiral(double x, double y, double r1, double r2, double step, double start_angle=0) :
-        m_x(x), 
-        m_y(y), 
-        m_r1(r1), 
-        m_r2(r2), 
-        m_step(step), 
+        m_x(x),
+        m_y(y),
+        m_r1(r1),
+        m_r2(r2),
+        m_step(step),
         m_start_angle(start_angle),
         m_angle(start_angle),
         m_da(agg::deg2rad(4.0)),
@@ -39,11 +39,11 @@ public:
     {
     }
 
-    void rewind(unsigned) 
-    { 
-        m_angle = m_start_angle; 
-        m_curr_r = m_r1; 
-        m_start = true; 
+    void rewind(unsigned)
+    {
+        m_angle = m_start_angle;
+        m_curr_r = m_r1;
+        m_start = true;
     }
 
     unsigned vertex(double* x, double* y)
@@ -54,7 +54,7 @@ public:
         *y = m_y + sin(m_angle) * m_curr_r;
         m_curr_r += m_dr;
         m_angle += m_da;
-        if(m_start) 
+        if(m_start)
         {
             m_start = false;
             return agg::path_cmd_move_to;
@@ -86,9 +86,9 @@ namespace agg
     {
         unsigned m_contours;
         unsigned m_points;
-    
+
         conv_poly_counter(Src& src) : m_src(&src), m_contours(0), m_points(0) {}
-    
+
         void rewind(unsigned path_id)
         {
             m_contours = 0;
@@ -124,7 +124,7 @@ class the_application : public agg::platform_support
 	virtual void on_key(int x, int y, unsigned key, unsigned flags)
 	{
 		if(key == agg::key_escape) exit(0);
-		
+
 	}
 
 public:
@@ -180,7 +180,7 @@ public:
             start_timer();
             while(!agg::is_stop(cmd = counter.vertex(&x, &y)))
             {
-				if(agg::is_move_to(cmd)) 
+				if(agg::is_move_to(cmd))
 					ps.move_to(x, y);
 				else if(agg::is_line_to(cmd))
 					ps.line_to(x, y);
@@ -292,7 +292,7 @@ public:
                 agg::conv_stroke<agg::path_storage> stroke(ps2);
                 stroke.width(10.0);
 
-                agg::conv_clipper<agg::path_storage, 
+                agg::conv_clipper<agg::path_storage,
                               agg::conv_stroke<agg::path_storage> > clp(ps1, stroke, agg::clipper_or, agg::clipper_non_zero, agg::clipper_non_zero);
 
 
@@ -348,13 +348,13 @@ public:
                 mtx1 *= agg::trans_affine_scaling(2.0);
 
                 mtx2 = mtx1;
-                mtx2 *= agg::trans_affine_translation(m_x - initial_width()/2, 
+                mtx2 *= agg::trans_affine_translation(m_x - initial_width()/2,
                                                       m_y - initial_height()/2);
 
                 agg::conv_transform<agg::path_storage> trans_gb_poly(gb_poly, mtx1);
                 agg::conv_transform<agg::path_storage> trans_arrows(arrows, mtx2);
 
-                agg::conv_clipper<agg::conv_transform<agg::path_storage>, 
+                agg::conv_clipper<agg::conv_transform<agg::path_storage>,
                               agg::conv_transform<agg::path_storage> > clp(trans_gb_poly, trans_arrows, agg::clipper_or, agg::clipper_non_zero, agg::clipper_non_zero);
 
                 ras.add_path(trans_gb_poly);
@@ -366,7 +366,7 @@ public:
                 ras.add_path(stroke_gb_poly);
                 ren.color(agg::rgba(0, 0, 0));
                 agg::render_scanlines(ras, sl, ren);
-        
+
                 ras.add_path(trans_arrows);
                 ren.color(agg::rgba(0.0, 0.5, 0.5, 0.1));
                 agg::render_scanlines(ras, sl, ren);
@@ -394,7 +394,7 @@ public:
 
                 agg::conv_transform<agg::path_storage> trans_gb_poly(gb_poly, mtx);
 
-                agg::conv_clipper<agg::conv_transform<agg::path_storage>, 
+                agg::conv_clipper<agg::conv_transform<agg::path_storage>,
                               agg::conv_stroke<spiral> > clp(trans_gb_poly, stroke, agg::clipper_or, agg::clipper_non_zero, agg::clipper_non_zero);
 
                 ras.add_path(trans_gb_poly);
@@ -406,7 +406,7 @@ public:
                 ras.add_path(stroke_gb_poly);
                 ren.color(agg::rgba(0, 0, 0));
                 agg::render_scanlines(ras, sl, ren);
-        
+
                 ras.add_path(stroke);
                 ren.color(agg::rgba(0.0, 0.5, 0.5, 0.1));
                 agg::render_scanlines(ras, sl, ren);
@@ -477,7 +477,7 @@ public:
                 agg::conv_transform<agg::path_storage> trans(glyph, mtx);
                 agg::conv_curve<agg::conv_transform<agg::path_storage> > curve(trans);
 
-                agg::conv_clipper<agg::conv_stroke<spiral>, 
+                agg::conv_clipper<agg::conv_stroke<spiral>,
                                  agg::conv_curve<
                                      agg::conv_transform<
                                          agg::path_storage> > > clp(stroke, curve, agg::clipper_or, agg::clipper_non_zero, agg::clipper_non_zero);
@@ -570,5 +570,3 @@ int agg_main(int argc, char* argv[])
     }
     return 0;
 }
-
-

@@ -86,7 +86,7 @@ namespace agg
 
     void rewind(unsigned path_id);
     unsigned vertex(double* x, double* y);
-  
+
     bool next_contour();
     bool next_vertex(double* x, double* y);
     void start_extracting();
@@ -130,7 +130,7 @@ namespace agg
 
   //------------------------------------------------------------------------
 
-  template<class VSA, class VSB> 
+  template<class VSA, class VSB>
   void conv_clipper<VSA, VSB>::start_extracting()
   {
     m_status = status_move_to;
@@ -222,7 +222,7 @@ namespace agg
   }
   //------------------------------------------------------------------------------
 
-  template<class VSA, class VSB> 
+  template<class VSA, class VSB>
   void conv_clipper<VSA, VSB>::add_vertex_(double &x, double &y)
   {
 	  ClipperLib::IntPoint v;
@@ -233,9 +233,9 @@ namespace agg
   }
   //------------------------------------------------------------------------------
 
-  template<class VSA, class VSB> 
+  template<class VSA, class VSB>
   bool conv_clipper<VSA, VSB>::next_contour()
-  {   
+  {
 	m_contour++;
 	if(m_contour >= (int)m_result.size()) return false;
 	m_vertex =-1;
@@ -243,7 +243,7 @@ namespace agg
 }
 //------------------------------------------------------------------------------
 
-  template<class VSA, class VSB> 
+  template<class VSA, class VSB>
   bool conv_clipper<VSA, VSB>::next_vertex(double *x, double *y)
   {
     m_vertex++;

@@ -179,4 +179,3 @@ LRESULT CALLBACK WndProcedure(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
     }
 }
 //---------------------------------------------------------------------------
-
