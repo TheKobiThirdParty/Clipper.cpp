@@ -48,10 +48,10 @@
 #include <ostream>
 #include <functional>
 
-namespace ClipperLib {
+namespace clipper {
 
-static double const pi = 3.141592653589793238;
-static double const two_pi = pi *2;
+static double const pi = M_PI;
+static double const two_pi = M_PI_2;
 static double const def_arc_tolerance = 0.25;
 
 enum Direction { dRightToLeft, dLeftToRight };
@@ -4626,4 +4626,4 @@ std::ostream& operator <<(std::ostream &s, const Paths &p)
 }
 //------------------------------------------------------------------------------
 
-} //ClipperLib namespace
+} //clipper namespace
