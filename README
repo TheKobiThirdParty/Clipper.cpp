@@ -273,7 +273,7 @@ v4.5.1 - 28 September 2011
   deleted since integer range is now managed implicitly.
 * BugFix: Minor bug in OffsetPolygon mitering.
 * Change: C# JoinType enum moved from Clipper class to
-  ClipperLib namespace.
+  clipper namespace.
 * Change: The Area function now returns the absolute area
   (irrespective of orientation).
 * Change: The IsClockwise function now requires a second
@@ -291,7 +291,7 @@ v4.4.3 - 29 August 2011
   function (affected C++ & C# translations).
 * BugFix: fixed a minor bug in OffsetPolygons' function
   declaration (affected C++ translation only).
-* Change: 'clipper' namespace changed to 'ClipperLib'
+* Change: 'clipper' namespace changed to 'clipper'
   namespace in both C++ and C# code to remove the ambiguity
   between the Clipper class and the namespace. (This also
   required numerous updates to the accompanying demos.)

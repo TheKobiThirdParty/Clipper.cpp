@@ -11,7 +11,7 @@
 #include "../clipper.hpp"
 
 using namespace std;
-using namespace ClipperLib;
+using namespace clipper;
 
 enum poly_color_type { pctSubject, pctClip, pctSolution };
 

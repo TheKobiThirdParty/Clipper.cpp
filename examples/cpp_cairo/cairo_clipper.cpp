@@ -18,7 +18,7 @@
 #include "clipper.hpp"
 #include "cairo_clipper.hpp"
 
-namespace ClipperLib {
+namespace clipper {
   namespace cairo {
 
     namespace {

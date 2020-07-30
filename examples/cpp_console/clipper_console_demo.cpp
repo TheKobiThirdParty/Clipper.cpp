@@ -16,7 +16,7 @@
 #include "clipper.hpp"
 
 using namespace std;
-using namespace ClipperLib;
+using namespace clipper;
 
 //---------------------------------------------------------------------------
 // SVGBuilder class

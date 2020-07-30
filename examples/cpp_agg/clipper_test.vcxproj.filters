@@ -3,7 +3,7 @@
   <ItemGroup>
     <ClCompile Include="clipper_test.cpp" />
     <ClCompile Include="..\clipper.cpp">
-      <Filter>ClipperLib</Filter>
+      <Filter>clipper</Filter>
     </ClCompile>
     <ClCompile Include="..\agg_src\src\agg_arc.cpp">
       <Filter>agg_src</Filter>
@@ -100,7 +100,7 @@
     <Filter Include="agg_src">
       <UniqueIdentifier>{31703eea-b46a-4b7c-93fe-7b3889404c6f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ClipperLib">
+    <Filter Include="clipper">
       <UniqueIdentifier>{0d7823fd-c31f-4f5d-b1f5-3f3c91751bf3}</UniqueIdentifier>
     </Filter>
     <Filter Include="agg_clipper">
@@ -109,7 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\clipper.hpp">
-      <Filter>ClipperLib</Filter>
+      <Filter>clipper</Filter>
     </ClInclude>
     <ClInclude Include="agg_conv_clipper.h">
       <Filter>agg_clipper</Filter>

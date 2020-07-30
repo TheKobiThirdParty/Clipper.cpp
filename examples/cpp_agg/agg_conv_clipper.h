@@ -41,11 +41,11 @@ namespace agg
     int										m_contour;
     int										m_scaling_factor;
     clipper_op_e              m_operation;
-    pod_bvector<ClipperLib::IntPoint, 8>		m_vertex_accumulator;
-    ClipperLib::Paths         m_poly_a;
-    ClipperLib::Paths         m_poly_b;
-    ClipperLib::Paths         m_result;
-    ClipperLib::Clipper       m_clipper;
+    pod_bvector<clipper::IntPoint, 8>		m_vertex_accumulator;
+    clipper::Paths         m_poly_a;
+    clipper::Paths         m_poly_b;
+    clipper::Paths         m_result;
+    clipper::Clipper       m_clipper;
     clipper_PolyFillType      m_subjFillType;
     clipper_PolyFillType      m_clipFillType;
 
@@ -91,9 +91,9 @@ namespace agg
     bool next_vertex(double* x, double* y);
     void start_extracting();
     void add_vertex_(double &x, double &y);
-    void end_contour(ClipperLib::Paths &p);
+    void end_contour(clipper::Paths &p);
 
-	template<class VS> void add(VS &src, ClipperLib::Paths &p){
+	template<class VS> void add(VS &src, clipper::Paths &p){
 		unsigned cmd;
 		double x; double y; double start_x; double start_y;
 		bool starting_first_line;
@@ -149,57 +149,57 @@ namespace agg
     add( m_src_b , m_poly_b );
     m_result.resize(0);
 
-    ClipperLib::PolyFillType pftSubj, pftClip;
+    clipper::PolyFillType pftSubj, pftClip;
     switch (m_subjFillType)
     {
-      case clipper_even_odd: pftSubj = ClipperLib::pftEvenOdd; break;
-      case clipper_non_zero: pftSubj = ClipperLib::pftNonZero; break;
-      case clipper_positive: pftSubj = ClipperLib::pftPositive; break;
-      default: pftSubj = ClipperLib::pftNegative;
+      case clipper_even_odd: pftSubj = clipper::pftEvenOdd; break;
+      case clipper_non_zero: pftSubj = clipper::pftNonZero; break;
+      case clipper_positive: pftSubj = clipper::pftPositive; break;
+      default: pftSubj = clipper::pftNegative;
     }
     switch (m_clipFillType)
     {
-      case clipper_even_odd: pftClip = ClipperLib::pftEvenOdd; break;
-      case clipper_non_zero: pftClip = ClipperLib::pftNonZero; break;
-      case clipper_positive: pftClip = ClipperLib::pftPositive; break;
-      default: pftClip = ClipperLib::pftNegative;
+      case clipper_even_odd: pftClip = clipper::pftEvenOdd; break;
+      case clipper_non_zero: pftClip = clipper::pftNonZero; break;
+      case clipper_positive: pftClip = clipper::pftPositive; break;
+      default: pftClip = clipper::pftNegative;
     }
 
     m_clipper.Clear();
     switch( m_operation ) {
       case clipper_or:
         {
-        m_clipper.AddPaths( m_poly_a , ClipperLib::ptSubject, true );
-        m_clipper.AddPaths( m_poly_b , ClipperLib::ptClip, true );
-        m_clipper.Execute( ClipperLib::ctUnion , m_result , pftSubj, pftClip);
+        m_clipper.AddPaths( m_poly_a , clipper::ptSubject, true );
+        m_clipper.AddPaths( m_poly_b , clipper::ptClip, true );
+        m_clipper.Execute( clipper::ctUnion , m_result , pftSubj, pftClip);
 		break;
         }
       case clipper_and:
         {
-        m_clipper.AddPaths( m_poly_a , ClipperLib::ptSubject, true );
-        m_clipper.AddPaths( m_poly_b , ClipperLib::ptClip, true );
-        m_clipper.Execute( ClipperLib::ctIntersection , m_result, pftSubj, pftClip );
+        m_clipper.AddPaths( m_poly_a , clipper::ptSubject, true );
+        m_clipper.AddPaths( m_poly_b , clipper::ptClip, true );
+        m_clipper.Execute( clipper::ctIntersection , m_result, pftSubj, pftClip );
 		break;
         }
       case clipper_xor:
         {
-        m_clipper.AddPaths( m_poly_a , ClipperLib::ptSubject, true );
-        m_clipper.AddPaths( m_poly_b , ClipperLib::ptClip, true );
-        m_clipper.Execute( ClipperLib::ctXor , m_result, pftSubj, pftClip );
+        m_clipper.AddPaths( m_poly_a , clipper::ptSubject, true );
+        m_clipper.AddPaths( m_poly_b , clipper::ptClip, true );
+        m_clipper.Execute( clipper::ctXor , m_result, pftSubj, pftClip );
 		break;
         }
       case clipper_a_minus_b:
         {
-        m_clipper.AddPaths( m_poly_a , ClipperLib::ptSubject, true );
-        m_clipper.AddPaths( m_poly_b , ClipperLib::ptClip, true );
-        m_clipper.Execute( ClipperLib::ctDifference , m_result, pftSubj, pftClip );
+        m_clipper.AddPaths( m_poly_a , clipper::ptSubject, true );
+        m_clipper.AddPaths( m_poly_b , clipper::ptClip, true );
+        m_clipper.Execute( clipper::ctDifference , m_result, pftSubj, pftClip );
 		break;
         }
       case clipper_b_minus_a:
         {
-        m_clipper.AddPaths( m_poly_b , ClipperLib::ptSubject, true );
-        m_clipper.AddPaths( m_poly_a , ClipperLib::ptClip, true );
-        m_clipper.Execute( ClipperLib::ctDifference , m_result, pftSubj, pftClip );
+        m_clipper.AddPaths( m_poly_b , clipper::ptSubject, true );
+        m_clipper.AddPaths( m_poly_a , clipper::ptClip, true );
+        m_clipper.Execute( clipper::ctDifference , m_result, pftSubj, pftClip );
 		break;
         }
     }
@@ -208,7 +208,7 @@ namespace agg
   //------------------------------------------------------------------------------
 
   template<class VSA, class VSB>
-  void conv_clipper<VSA, VSB>::end_contour( ClipperLib::Paths &p)
+  void conv_clipper<VSA, VSB>::end_contour( clipper::Paths &p)
   {
   unsigned i, len;
 
@@ -225,7 +225,7 @@ namespace agg
   template<class VSA, class VSB>
   void conv_clipper<VSA, VSB>::add_vertex_(double &x, double &y)
   {
-	  ClipperLib::IntPoint v;
+	  clipper::IntPoint v;
 
 	  v.X = Round(x * m_scaling_factor);
 	  v.Y = Round(y * m_scaling_factor);

@@ -78,7 +78,7 @@ void OnPaint(HWND hWnd, HDC dc)
   cairo_set_source_rgba(cr, 1, 1, 1, 1);
   cairo_fill(cr);
 
-  using namespace ClipperLib;
+  using namespace clipper;
 
   const int scaling = 2;
 
