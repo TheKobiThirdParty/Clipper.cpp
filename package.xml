@@ -1,14 +1,17 @@
 <?xml version="1.0"?>
-<package format="2">
+<package format="3">
   <name>clipper</name>
-  <version>6.4.2</version>
+  <version>0.1.0</version>
   <description>
-     clipper wrapped in catkin for ROS
+    Clipper wrapped in catkin for ROS
   </description>
 
-  <maintainer email="alexis@thekobi.com">Alexis Paques</maintainer>
+  <maintainer email="alexis.paques@be.bosch.com">Alexis Paques</maintainer>
 
   <license>Boost-1.0</license>
 
-  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>

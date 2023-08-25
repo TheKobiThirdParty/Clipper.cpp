@@ -1,31 +1,35 @@
 cmake_minimum_required(VERSION 3.9)
 project(clipper)
 
-find_package(catkin REQUIRED)
-
-
-catkin_package(
-  INCLUDE_DIRS inc
-  LIBRARIES ${PROJECT_NAME}
-)
+find_package(ament_cmake REQUIRED)
 
 include_directories(
   inc
-  ${catkin_INCLUDE_DIRS}
 )
 
 add_library(${PROJECT_NAME}
   src/clipper.cpp
 )
-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
+target_include_directories(${PROJECT_NAME}
+  PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>
+    $<INSTALL_INTERFACE:include>)
+
+ament_export_include_directories(include)
+ament_export_libraries(${PROJECT_NAME})
+ament_export_targets(
+  export_${PROJECT_NAME}
+)
 
 install(DIRECTORY inc/${PROJECT_NAME}/
-   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+   DESTINATION include/${PROJECT_NAME}/
    FILES_MATCHING PATTERN "*.h*"
 )
 
 install(TARGETS ${PROJECT_NAME}
-  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+  EXPORT export_${PROJECT_NAME}
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
 )
+
+ament_package()

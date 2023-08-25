@@ -1,0 +1,13 @@
+# - Config file for the clipper package
+# It defines the following variables
+#  clipper_INCLUDE_DIRS - include directories for FooBar
+#  clipper_LIBRARIES    - libraries to link against
+#  clipper_EXECUTABLE   - the bar executable
+
+set(clipper_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
+
+# Our library dependencies (contains definitions for IMPORTED targets)
+include("${clipper_DIR}/export_clipper.cmake")
+
+# These are IMPORTED targets created by clipperTargets.cmake
+set(clipper_LIBRARIES clipper)
