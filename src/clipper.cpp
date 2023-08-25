@@ -4383,7 +4383,7 @@ OutPt* ExcludeOp(OutPt* op)
   result->Next = op->Next;
   op->Next->Prev = result;
   result->Idx = 0;
-  return result;
+  return result->Next;
 }
 //------------------------------------------------------------------------------
 
@@ -4410,7 +4410,14 @@ void CleanPolygon(const Path& in_poly, Path& out_poly, double distance)
   }
 
   double distSqrd = distance * distance;
-  OutPt* op = &outPts[0];
+  // Start the simplification from the id 1.
+  // Thus ensuring the first point is unchanged.
+  OutPt *op = &outPts[1];
+  // On reaching outPts[size-2], it will stop the process, as we can up to
+  // remove up to: op and next. (thus ensuring the last point is unchanged)
+  outPts[0].Idx = 1;
+  outPts[size - 1].Idx = 1;
+  outPts[size - 2].Idx = 1;
   while (op->Idx == 0 && op->Next != op->Prev)
   {
     if (PointsAreClose(op->Pt, op->Prev->Pt, distSqrd))
@@ -4438,6 +4445,8 @@ void CleanPolygon(const Path& in_poly, Path& out_poly, double distance)
 
   if (size < 3) size = 0;
   out_poly.resize(size);
+  // The boundary starts from the first point as it was never changed.
+  op = &outPts[0];
   for (size_t i = 0; i < size; ++i)
   {
     out_poly[i] = op->Pt;
